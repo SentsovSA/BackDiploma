@@ -11,7 +11,7 @@ from django.utils.html import mark_safe
 class Seller(models.Model):
     sellerID = models.AutoField(primary_key=True, auto_created=True)
     sellerName = models.CharField(max_length=256)
-    sellerEmail = models.CharField(max_legth=256)
+    sellerEmail = models.CharField(max_length=256)
     sellerPhone = models.CharField(max_length=256)
 
     def __str__(self):
@@ -54,7 +54,7 @@ class Car(models.Model):
 class User(models.Model):
     userID = models.AutoField(primary_key=True, auto_created=True)
     userName = models.CharField(max_length=256)
-    userEmail = models.CharField(max_legth=256)
+    userEmail = models.CharField(max_length=256)
     userPhone = models.CharField(max_length=256)
 
     def __str__(self):
@@ -74,8 +74,8 @@ class PurchaseRequest(models.Model):
     requestDate = models.DateField()
     status = models.CharField(max_length=256)
 
-    carID = models.OneToOneField(Car, related_name='carIDs', null=True, on_delete=models.SET_NULL)
-    userID = models.OneToOneField(User, related_name='userIDs', null=True, on_delete=models.SET_NULL)
+    carID = models.OneToOneField(Car, related_name='carIDsPurchase', null=True, on_delete=models.SET_NULL)
+    userID = models.OneToOneField(User, related_name='userIDsPurchase', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.requestID
@@ -116,8 +116,8 @@ class SellerReview(models.Model):
     rating = models.IntegerField()
     comment = models.CharField(max_length=256)
 
-    sellerID = models.OneToOneField(Seller, related_name='seller', null=True, on_delete=models.SET_NULL)
-    userID = models.OneToOneField(User, related_name='userIDs', null=True, on_delete=models.SET_NULL)
+    sellerID = models.OneToOneField(Seller, related_name='sellerReview', null=True, on_delete=models.SET_NULL)
+    userID = models.OneToOneField(User, related_name='userIDsReview', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.reviewID

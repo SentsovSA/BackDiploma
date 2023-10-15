@@ -1,6 +1,21 @@
-from .models import Seller, Car, User, PurchaseRequest, CarImage, SellerReview
+from .models import (
+    Seller,
+    Car,
+    User,
+    PurchaseRequest,
+    CarImage,
+    SellerReview,
+)
 from rest_framework import viewsets, permissions
-from .serializers import SellerSerializer, CarSerializer, UserSerializer, PurchaseRequestSerializer, CarImageSerializer, SellerReviewSerializer
+
+from .serializers import (
+    SellerSerializer,
+    CarSerializer,
+    UserSerializer,
+    PurchaseRequestSerializer,
+    CarImageSerializer,
+    SellerReviewSerializer,
+)
 
 
 class SellerViewSet(viewsets.ModelViewSet):
