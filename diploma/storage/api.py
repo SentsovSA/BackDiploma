@@ -5,6 +5,8 @@ from .models import (
     PurchaseRequest,
     CarImage,
     SellerReview,
+    Part,
+    PartImage,
 )
 from rest_framework import viewsets, permissions
 
@@ -15,6 +17,8 @@ from .serializers import (
     PurchaseRequestSerializer,
     CarImageSerializer,
     SellerReviewSerializer,
+    PartSerializer,
+    PartImageSerializer
 )
 
 
@@ -64,3 +68,19 @@ class SellerReviewViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = SellerReviewSerializer
+
+
+class PartViewSet(viewsets.ModelViewSet):
+    queryset = Part.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = PartSerializer
+
+
+class PartImageViewSet(viewsets.ModelViewSet):
+    queryset = PartImage.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = PartImageSerializer

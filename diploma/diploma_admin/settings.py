@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-b%^+r@#q+=$4t52@1pz0oipb%#-(u-ml2*lby1%jnqi_hgsq@k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storage.apps.StorageConfig',
     'rest_framework',
+    'django_telegram_login',
+    'social_django',
+
+    'storage',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +130,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+TELEGRAM_BOT_NAME = 'CarShippingLoginBot'
+TELEGRAM_BOT_TOKEN = '6720805417:AAHOQEFmmcDGN8dLsz1khUhHXTMdQiKNgzg'
+TELEGRAM_LOGIN_REDIRECT_URL = 'https://lazy-birds-behave.loca.lt'
+
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'car.app@mail.ru'
+EMAIL_HOST_PASSWORD = 'DtaCM5bwrAj5wXy6P6wg'

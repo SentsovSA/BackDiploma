@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Seller, Car, User, PurchaseRequest, CarImage, SellerReview
+from .models import Seller, Car, User, PurchaseRequest, CarImage, SellerReview, Part, PartImage
 
 
 class SellerAdmin(admin.ModelAdmin):
@@ -57,3 +57,21 @@ class SellerReviewAdmin(admin.ModelAdmin):
 
 
 admin.site.register(SellerReview, SellerReviewAdmin)
+
+
+class PartImageAdmin(admin.ModelAdmin):
+    list_display = ('fileName', 'imageID', 'file', 'imageURL',)
+    list_display_links = ('imageID',)
+    search_fields = ('imageID',)
+
+
+admin.site.register(PartImage, PartImageAdmin)
+
+
+class PartAdmin(admin.ModelAdmin):
+    list_display = ('partID', 'partName', 'partPrice', 'condition', 'description', 'stock',)
+    list_display_links = ('partID', 'partName',)
+    search_fields = ('partID', 'partName',)
+
+
+admin.site.register(Part, PartAdmin)

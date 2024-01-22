@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Seller, Car, User, PurchaseRequest, CarImage, SellerReview
+from .models import Seller, Car, User, PurchaseRequest, CarImage, SellerReview, Part, PartImage
 
 
 class SellerSerializer(serializers.ModelSerializer):
@@ -36,4 +36,16 @@ class CarImageSerializer(serializers.ModelSerializer):
 class SellerReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = SellerReview
+        fields = '__all__'
+
+
+class PartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Part
+        fields = '__all__'
+
+
+class PartImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartImage
         fields = '__all__'

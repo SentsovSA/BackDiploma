@@ -6,6 +6,8 @@ from .api import (
     PurchaseRequestViewSet,
     CarImageViewSet,
     SellerReviewViewSet,
+    PartViewSet,
+    PartImageViewSet
 )
 
 
@@ -17,6 +19,8 @@ router.register('UserViewSet', UserViewSet)
 router.register('PurchaseRequestViewSet', PurchaseRequestViewSet)
 router.register('CarImageViewSet', CarImageViewSet)
 router.register('SellerReviewViewSet', SellerReviewViewSet)
+router.register('PartViewSet', PartViewSet)
+router.register('PartImageViewSet', PartImageViewSet)
 
 urlpatterns = []
 
