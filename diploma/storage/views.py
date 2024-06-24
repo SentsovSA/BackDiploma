@@ -1,10 +1,12 @@
 import logging
 
+from django.apps import apps
 from django.conf import settings
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from random import randint as random
+
 from storage.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -22,6 +24,32 @@ response = []
 
 def home(request):
     return render(request, "index.html")
+
+
+def update_data(request):
+    if request.method == 'POST':
+        modelRequest = request.GET.get('model')
+        idRequest = request.GET.get('id')
+        model = apps.get_model(app_label='storage', model_name=modelRequest)
+        print(model)
+        if model:
+            obj_id = idRequest
+            field = request.GET.get('field')
+            newValue = request.GET.get('newValue')
+            try:
+                obj = model.objects.get(pk=obj_id)
+            except model.DoesNotExist:
+                print("zhopa")
+                pass
+            else:
+                setattr(obj, field, newValue)
+                obj.save()
+        else:
+            return JsonResponse({'message': 'Что-то пошло не так'}, status=500)
+            pass
+        return JsonResponse({'message': 'Данные успешно обновлены'}, status=200)
+
+    return JsonResponse({'error': 'Метод запроса не поддерживается'}, status=405)
 
 
 @csrf_exempt
@@ -48,11 +76,10 @@ def login(request):
                 print(response)
 
             elif method == 'confirm':
-                email = str(request.POST.get('email'))
-                password = str(request.POST.get('pass'))
-                name = str(request.POST.get('name'))
-                phone = str(request.POST.get('phone'))
-                User.objects.create(userName=name, userEmail=email, userPhone=phone, userPassword=password)
+                email = jsonRequest['email']
+                name = jsonRequest['name']
+                phone = jsonRequest['phone']
+                User.objects.create(userName=name, userEmail=email, userPhone=phone)
                 user = User.objects.get(userEmail=email)
                 response = {"response": user.userID}
 
@@ -108,5 +135,4 @@ def login(request):
         else:
             response = {'Response': 404}
 
-    print(response['code'])
-    return JsonResponse(data=response['code'], safe=False)
+    return JsonResponse(data=response, safe=False)
